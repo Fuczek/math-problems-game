@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://u53ta3qkalt"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_3pu6e"]
+[ext_resource type="Texture2D" uid="uid://catkqyvnokxqq" path="res://assets/icon.svg" id="2_el3vn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xh5s4"]
+size = Vector2(102, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f25os"]
+resource_local_to_scene = true
+font_size = 70
+outline_size = 30
+outline_color = Color(0.423529, 1, 0.309804, 1)
+
+[node name="enemy" type="CharacterBody2D"]
+position = Vector2(423, 190)
+collision_layer = 2
+script = ExtResource("1_3pu6e")
+value = 6
+
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+shape = SubResource("RectangleShape2D_xh5s4")
+
+[node name="player_sprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_el3vn")
+
+[node name="value" type="Label" parent="."]
+offset_left = -51.0
+offset_top = -52.0
+offset_right = 51.0
+offset_bottom = 52.0
+text = "5"
+label_settings = SubResource("LabelSettings_f25os")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xh5s4")
+
+[connection signal="area_entered" from="Area" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="Area" to="." method="_on_area_exited"]
